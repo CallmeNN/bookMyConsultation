@@ -25,9 +25,10 @@ public class RatingsController {
 	
 		//return http response with status set to OK
 	@PostMapping("")
-	public ResponseEntity<> submitRatings(@RequestBody Rating rating){
-		return ResponseEntity.ok(ratingsService.submitRatings());
+	public ResponseEntity<Void> submitRatings(@RequestBody Rating rating){
+		ratingsService.submitRatings(rating);
+		return ResponseEntity.ok().build();
 	}
 
-	
+
 }

@@ -49,7 +49,7 @@ public class DoctorService {
 
 		ValidationUtils.validate(doctor);
 		if (doctor.getAddress() == null) {
-			throw new InvalidInputException("Address cannot be null");
+			throw new InvalidInputException(List.of("address"));
 		}
 
 		if (doctor.getSpeciality() == null) {

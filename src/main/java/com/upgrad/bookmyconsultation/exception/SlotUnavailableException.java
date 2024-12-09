@@ -1,5 +1,10 @@
 package com.upgrad.bookmyconsultation.exception;
 
-public class SlotUnavailableException extends RuntimeException {
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
+@Data
+@AllArgsConstructor
+public class SlotUnavailableException extends RuntimeException {
+    private String message;
 }

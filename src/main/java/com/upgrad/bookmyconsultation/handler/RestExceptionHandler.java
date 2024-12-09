@@ -65,22 +65,19 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 		return new ResponseEntity(errorResponse(ex), INTERNAL_SERVER_ERROR);
 	}
 
-	@ExceptionHandler(SlotUnavailableException.class)
-	public ResponseEntity<ErrorResponse> handleSlotUnavailable(SlotUnavailableException e) {
-		return new ResponseEntity(errorResponse(e), HttpStatus.BAD_REQUEST);
-	}
-
 	@ExceptionHandler(InvalidInputException.class)
 	public ResponseEntity<ErrorResponse> handleInvalidInput(InvalidInputException e) {
 		return new ResponseEntity(errorResponse(e), HttpStatus.BAD_REQUEST);
 	}
 
-
-	
-	
 	//mark as ExceptionHandler for the class SlotUnavailableException
 	//create a method handleSlotUnavailableException with return type of ResponseEntity
 		//return http response for bad request with error code and a message
+
+	@ExceptionHandler(SlotUnavailableException.class)
+	public ResponseEntity<ErrorResponse> handleSlotUnavailableException(SlotUnavailableException e) {
+		return new ResponseEntity<>(errorResponse(e), HttpStatus.BAD_REQUEST);
+	}
 
 	private ErrorResponse errorResponse(final ApplicationException exc) {
 		exc.printStackTrace();

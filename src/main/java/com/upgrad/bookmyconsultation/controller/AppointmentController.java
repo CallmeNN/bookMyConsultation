@@ -1,6 +1,7 @@
 package com.upgrad.bookmyconsultation.controller;
 
 import com.upgrad.bookmyconsultation.entity.Appointment;
+import com.upgrad.bookmyconsultation.exception.InvalidInputException;
 import com.upgrad.bookmyconsultation.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -26,7 +27,7 @@ public class AppointmentController {
 		//save the appointment details to the database and save the response from the method used
 		//return http response using ResponseEntity
 	@PostMapping(value = "",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> bookAppointment(@RequestBody Appointment appointment){
+	public ResponseEntity<String> bookAppointment(@RequestBody Appointment appointment) throws InvalidInputException {
 		return ResponseEntity.ok(appointmentService.appointment(appointment));
 	}
 	

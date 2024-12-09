@@ -36,7 +36,7 @@ public class AppointmentService {
 		//if the appointment exists throw the SlotUnavailableException
 		//save the appointment details to the database
 		//return the appointment id
-	public String appointment(Appointment appointment) throws InvalidInputException,SlotUnavailableException{
+	public String appointment(Appointment appointment) throws SlotUnavailableException, InvalidInputException {
 		ValidationUtils.validate(appointment);
 
 		boolean isSlotTaken = appointmentRepository.existsByDoctorIdAndAppointmentDateAndTimeSlot(
@@ -48,7 +48,6 @@ public class AppointmentService {
 
 		//save appointment details
 		Appointment savedAppointment = appointmentRepository.save(appointment);
-
 		return savedAppointment.getId();
 	}
 	

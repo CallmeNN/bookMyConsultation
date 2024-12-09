@@ -27,7 +27,7 @@ public class UserService {
 	public User register(User user) throws InvalidInputException {
 		ValidationUtils.validate(user);
 
-		user.setCreatedDate(LocalDate.now().toString());
+		user.setCreateDate(LocalDate.now().toString());
 		encryptPassword(user);
 		userRepository.save(user);
 		return user;
@@ -41,6 +41,9 @@ public class UserService {
 
 	//create a method named getAllUsers that returns a List of type User
 		//return all the users from the database
+	public List<User> getAllUsers(){
+		return userRepository.findAll();
+	}
 	
 
 	private void encryptPassword(final User newUser) {

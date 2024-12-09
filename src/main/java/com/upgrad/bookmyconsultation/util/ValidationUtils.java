@@ -75,7 +75,7 @@ public class ValidationUtils {
 			errorFields.add("AppointmentDate");
 		}
 
-		if (errorFields.size() > 0) throw new InvalidInputException(errorFields);
+		if (!errorFields.isEmpty()) throw new InvalidInputException(errorFields);
 	}
 
 	public static boolean isValid(String dateStr) {

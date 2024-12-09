@@ -16,4 +16,6 @@ import java.util.List;
 @Repository
 public interface RatingsRepository extends CrudRepository<Rating,String>{
     List<Rating> findByDoctorId(String doctorId);
+
+    int countByDoctorId(String doctorId);
 }
