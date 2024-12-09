@@ -25,7 +25,7 @@ import java.util.UUID;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Doctor {
 	@Id
-	private String id = UUID.randomUUID().toString();
+	private String id;
 	private String firstName;
 	private String lastName;
 	@Enumerated(EnumType.STRING)

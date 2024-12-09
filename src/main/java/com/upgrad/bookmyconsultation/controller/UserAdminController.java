@@ -1,6 +1,7 @@
 package com.upgrad.bookmyconsultation.controller;
 
 import com.upgrad.bookmyconsultation.entity.User;
+import com.upgrad.bookmyconsultation.exception.ApplicationException;
 import com.upgrad.bookmyconsultation.exception.InvalidInputException;
 import com.upgrad.bookmyconsultation.service.AppointmentService;
 import com.upgrad.bookmyconsultation.service.UserService;
@@ -42,7 +43,7 @@ public class UserAdminController {
 	
 		//return http response with status set to OK
 	@PostMapping("/register")
-	public ResponseEntity<User> createUser(@RequestBody final User user) throws InvalidInputException {
+	public ResponseEntity<User> createUser(@RequestBody final User user) throws InvalidInputException, ApplicationException {
 		return ResponseEntity.ok(userService.register(user));
 	}
 	

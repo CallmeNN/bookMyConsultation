@@ -2,8 +2,10 @@ package com.upgrad.bookmyconsultation.service;
 
 
 import com.upgrad.bookmyconsultation.entity.User;
+import com.upgrad.bookmyconsultation.exception.ApplicationException;
 import com.upgrad.bookmyconsultation.exception.InvalidInputException;
 import com.upgrad.bookmyconsultation.exception.ResourceUnAvailableException;
+import com.upgrad.bookmyconsultation.model.AuthorizedUser;
 import com.upgrad.bookmyconsultation.provider.PasswordCryptographyProvider;
 import com.upgrad.bookmyconsultation.repository.UserRepository;
 import com.upgrad.bookmyconsultation.util.ValidationUtils;
@@ -23,13 +25,17 @@ public class UserService {
 	@Autowired
 	private PasswordCryptographyProvider passwordCryptographyProvider;
 
+	@Autowired
+	AuthenticationService authenticationService;
 
-	public User register(User user) throws InvalidInputException {
+
+	public User register(User user) throws InvalidInputException, ApplicationException {
 		ValidationUtils.validate(user);
 
 		user.setCreateDate(LocalDate.now().toString());
+		final AuthorizedUser authorizedUser = authenticationService.authenticate(user.getEmailId(), user.getPassword());
 		encryptPassword(user);
-		userRepository.save(user);
+		User savedUser = userRepository.save(user);
 		return user;
 	}
 
