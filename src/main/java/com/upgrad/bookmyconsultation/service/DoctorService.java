@@ -56,8 +56,8 @@ public class DoctorService {
 			doctor.setSpeciality(Speciality.GENERAL_PHYSICIAN);
 		}
 
-		doctor.setId(UUID.randomUUID().toString());  // Manually assigning the ID
-		doctor.getAddress().setId(UUID.randomUUID().toString());  // Manually assigning the Address ID
+		doctor.setId(UUID.randomUUID().toString());
+		doctor.getAddress().setId(UUID.randomUUID().toString());
 
 		Address address = addressRepository.save(doctor.getAddress());
 		doctor.setAddress(address);

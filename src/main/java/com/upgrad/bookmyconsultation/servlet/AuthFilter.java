@@ -35,7 +35,7 @@ public class AuthFilter extends ApiFilter {
 		}
 
 		final String pathInfo = servletRequest.getRequestURI();
-		if (!pathInfo.contains("register") && !pathInfo.contains("actuator") && !pathInfo.contains("doctors")) {
+		if (!pathInfo.contains("register") && !pathInfo.contains("actuator") && !pathInfo.contains("doctors")&& !pathInfo.contains("login")) {
 			final String authorization = servletRequest.getHeader(HttpHeaders.AUTHORIZATION);
 			if (StringUtils.isEmpty(authorization)) {
 				throw new UnauthorizedException(RestErrorCode.ATH_001);
@@ -55,6 +55,10 @@ public class AuthFilter extends ApiFilter {
 					return;
 				}
 			}
+		}else if (pathInfo.contains("login")) {
+			// Skip authorization header check for login endpoint
+			filterChain.doFilter(servletRequest, servletResponse);
+			return;
 		}
 		filterChain.doFilter(servletRequest, servletResponse);
 	}

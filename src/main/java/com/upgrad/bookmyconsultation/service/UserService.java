@@ -33,7 +33,6 @@ public class UserService {
 		ValidationUtils.validate(user);
 
 		user.setCreateDate(LocalDate.now().toString());
-		final AuthorizedUser authorizedUser = authenticationService.authenticate(user.getEmailId(), user.getPassword());
 		encryptPassword(user);
 		User savedUser = userRepository.save(user);
 		return user;

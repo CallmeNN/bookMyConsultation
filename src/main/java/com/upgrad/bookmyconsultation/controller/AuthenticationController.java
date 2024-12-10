@@ -10,6 +10,7 @@ package com.upgrad.bookmyconsultation.controller;
 
 import com.upgrad.bookmyconsultation.exception.ApplicationException;
 import com.upgrad.bookmyconsultation.model.AuthorizedUser;
+import com.upgrad.bookmyconsultation.model.LoginRequest;
 import com.upgrad.bookmyconsultation.provider.BasicAuthDecoder;
 import com.upgrad.bookmyconsultation.provider.BearerAuthDecoder;
 import com.upgrad.bookmyconsultation.service.AuthTokenService;
@@ -17,10 +18,7 @@ import com.upgrad.bookmyconsultation.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
@@ -33,9 +31,8 @@ public class AuthenticationController {
 	private AuthTokenService authTokenService;
 
 	@PostMapping(path = "/login")
-	public ResponseEntity<AuthorizedUser> login(@RequestHeader final String authorization) throws ApplicationException {
-		final BasicAuthDecoder basicAuthDecoder = new BasicAuthDecoder(authorization);
-		final AuthorizedUser authorizedUser = authenticationService.authenticate(basicAuthDecoder.getEmail(), basicAuthDecoder.getPassword());
+	public ResponseEntity<AuthorizedUser> login(@RequestBody LoginRequest loginRequest) throws ApplicationException {
+		final AuthorizedUser authorizedUser = authenticationService.authenticate(loginRequest.getEmail(), loginRequest.getPassword());
 		return ResponseEntity.status(HttpStatus.OK).body(authorizedUser);
 	}
 
